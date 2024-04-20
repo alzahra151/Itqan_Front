@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { initFlowbite } from 'flowbite';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-administrations',
@@ -23,6 +24,7 @@ export class AdministrationsComponent implements OnInit {
   departmentsForm: FormGroup
   constructor(private administrationService: AdministrationService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private primengConfig: PrimeNGConfig,
     private fb: FormBuilder) {
     this.administrationForm = this.fb.group({
       name: ['', Validators.required]
@@ -72,10 +74,9 @@ export class AdministrationsComponent implements OnInit {
   }
   ngOnInit() {
     this.getAdministration()
-    // if (isPlatformBrowser(this.platformId)) {
-    //   initFlowbite()
-    // }
-
-
+    this.primengConfig.ripple = true;
+    if (isPlatformBrowser(this.platformId)) {
+      initFlowbite()
+    }
   }
 }

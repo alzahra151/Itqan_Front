@@ -20,6 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CalendarModule } from 'primeng/calendar';
 import { initFlowbite } from 'flowbite';
 import { Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 declare var FlowBiteDatepicker: any; // Declare FlowBiteDatepicker to avoid TypeScript errors
 
 // import Datepicker from 'flowbite-datepicker/Datepicker';
@@ -67,6 +68,7 @@ export class AddExecutivePlanComponent implements OnInit {
     private administrationService: AdministrationService,
     private beneficiaryCateService: BeneficiaryCategoryService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private primengConfig: PrimeNGConfig,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -164,7 +166,7 @@ export class AddExecutivePlanComponent implements OnInit {
     this.getBeneficieryCats()
     this.getEmployees()
     this.getStraticigPlan()
-
+    this.primengConfig.ripple = true;
     if (isPlatformBrowser(this.platformId)) {
       initFlowbite()
       this.initializeDatepicker();
