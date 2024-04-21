@@ -173,7 +173,7 @@ export class AddExecutivePlanComponent implements OnInit {
     this.primengConfig.ripple = true;
     if (isPlatformBrowser(this.platformId)) {
       initFlowbite()
-      this.initDatePickerElement(this.datepickerEl)
+
     }
     this.route.params.subscribe((params) => {
       console.log(params)
@@ -182,7 +182,7 @@ export class AddExecutivePlanComponent implements OnInit {
         const id = params['id']
         console.log(' id:', this.planIdParam, id);
 
-        this.strategicPlanService.getstratigic_planByID(13).subscribe({
+        this.strategicPlanService.getstratigic_planByID(this.planIdParam).subscribe({
           next: (data) => {
             this.strategicPlan = data
             console.log(this.strategicPlan)
