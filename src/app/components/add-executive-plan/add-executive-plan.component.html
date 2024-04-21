@@ -279,10 +279,10 @@
                                             <td class=" border border-slate-300 ">
                                                 <select class="select-dropdown w-full text-sm"
                                                     formControlName="administration_id">
-                                                    <!-- <option selected>اختر الادارة</option> -->
+                                                    <option value="0" selected>اختر الادارة</option>
                                                     @for (item of administrations; track $index) {
-                                                    <option [value]="item?.id">
-                                                        {{item.name}}
+                                                    <option [value]="+item?.id">
+                                                        {{item?.name}}
                                                     </option>
                                                     }
 
@@ -291,9 +291,9 @@
                                             <td class="  border border-slate-300 ...">
                                                 <select class="select-dropdown w-full text-sm px-0 pr-0"
                                                     formControlName="employee_id">
-                                                    <option class="test-xs px-0 mx-0" value="1">الموظف اختر </option>
+                                                    <option class="test-xs px-0 mx-0" value="0">الموظف اختر </option>
                                                     @for (item of employees; track $index) {
-                                                    <option class="test-xs px-0" [value]="item?.id"> {{item.name}}
+                                                    <option class="test-xs px-0" [value]="+item?.id"> {{item.name}}
                                                     </option>
                                                     }
 

@@ -53,7 +53,7 @@ export class AddExecutivePlanComponent implements OnInit {
   activites?: Activity
   employees: any
   beneficiaryCats: BeneficiaryCategory[] = []
-  administrations: Administration[] = []
+  administrations: any[] = []
   strategicPlanForm: FormGroup;
   plans: any
   planIdParam: any
@@ -92,16 +92,16 @@ export class AddExecutivePlanComponent implements OnInit {
         automated_reports: [false],
         follow_up: [false],
         out_of_plan: [false],
-        Strategic_plan_id: [13],
+        Strategic_plan_id: [],
         goal_id: [],
         missions: this.fb.array([this.fb.group({
           name: [''],
           start_date: [new Date().toDateString()],
-          end_date: [''],
+          end_date: [new Date().toDateString()],
           number_value: [''],
           evaluation_method: [''],
           procedure: [''],
-          procedure_date: [''],
+          procedure_date: [new Date().toDateString()],
           description: [''],
           employee_id: [],
           administration_id: [],
@@ -131,18 +131,18 @@ export class AddExecutivePlanComponent implements OnInit {
       automated_reports: [false],
       follow_up: [false],
       out_of_plan: [false],
-      Strategic_plan_id: [13],
+      Strategic_plan_id: [],
       goal_id: [],
       missions: this.fb.array([this.fb.group({
         name: [''],
-        start_date: [''],
-        end_date: [''],
+        start_date: [new Date().toDateString()],
+        end_date: [new Date().toDateString()],
         number_value: [''],
         evaluation_method: [''],
         procedure: [''],
-        procedure_date: [''],
+        procedure_date: [new Date().toDateString()],
         description: [''],
-        employee_id: [],
+        employee_id: [null],
         administration_id: [],
       })])
     }));
