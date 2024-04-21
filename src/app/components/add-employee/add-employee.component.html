@@ -36,7 +36,7 @@
                         <div class="md:col-span-6 col-span-1  ">
                             <div class="grid md:grid-cols-6 grid-cols-1 flex items-center">
                                 <label class="md:col-span-1 " for="full_name">الرقم الوظيفي </label>
-                                <input type="text" formControlName="job_number" name="full_name" id="full_name"
+                                <input type="number" formControlName="job_number" name="full_name" id="full_name"
                                     class="md:col-span-5  h-8 border-gray-400 border mt-1  px-4   bg-gray-60"
                                     value="" />
                             </div>
@@ -44,7 +44,7 @@
                         <div class="md:col-span-6 col-span-1  ">
                             <div class="grid md:grid-cols-6 grid-cols-1 flex items-center">
                                 <label class="md:col-span-1 " for="full_name">رقم الهوية</label>
-                                <input type="text" formControlName="ID_number" name="full_name" id="full_name"
+                                <input type="number" formControlName="ID_number" name="full_name" id="full_name"
                                     class="md:col-span-5 h-8 border-gray-400 border mt-1  px-4   bg-gray-60" value="" />
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="md:col-span-6 col-span-1  ">
                             <div class="grid md:grid-cols-6 grid-cols-1 flex items-center">
                                 <label class="md:col-span-1 " for="full_name">السن</label>
-                                <input type="text" formControlName="age" name="full_name" id="full_name"
+                                <input type="number" formControlName="age" name="full_name" id="full_name"
                                     class="md:col-span-5 h-8 border-gray-400 border mt-1  px-4   bg-gray-60" value="" />
                             </div>
                         </div>
@@ -134,4 +134,4 @@
         </table>
     </div>
 </div>
-{{employeeForm.value| json}}
+<!-- {{employeeForm.value| json}} -->

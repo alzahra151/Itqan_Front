@@ -36,11 +36,11 @@ export class AddEmployeeComponent {
   ) {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
-      job_number: ['', Validators.required],
-      ID_number: ['', Validators.required],
+      job_number: [, Validators.required],
+      ID_number: [, Validators.required],
       address: [''],
       gender: ['', Validators.required],
-      age: ['', Validators.required],
+      age: [, Validators.required],
       mobile: ['', Validators.required],
       image: [''],
       department_id: []
@@ -62,12 +62,13 @@ export class AddEmployeeComponent {
     employeeData.append('gender', this.employeeForm.get('gender')?.value)
     employeeData.append('department_id', this.employeeForm.get('department_id')?.value)
 
-    employeeData.append('age', this.employeeForm.get('gender')?.value)
+    employeeData.append('age', this.employeeForm.get('age')?.value)
     employeeData.append('image', this.selectedFile)
     this.employeeService.addEmployee(employeeData).subscribe({
       next: (data) => {
         console.log(data)
         this.getEmployess()
+        this.employeeForm.reset()
       },
       error: (error) => {
         console.log(error)
