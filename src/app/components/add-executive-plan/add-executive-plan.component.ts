@@ -19,10 +19,14 @@ import { Administration } from '../../core/models/administration';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CalendarModule } from 'primeng/calendar';
 import { initFlowbite } from 'flowbite';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
-declare var FlowBiteDatepicker: any; // Declare FlowBiteDatepicker to avoid TypeScript errors
+import { json } from 'express';
+// import { DatepickerModule } from 'ng2-datepicker';
 
+// import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
+
+declare var Datepicker: any;
 // import Datepicker from 'flowbite-datepicker/Datepicker';
 // import { error } from 'console';
 @Component({
@@ -37,7 +41,6 @@ declare var FlowBiteDatepicker: any; // Declare FlowBiteDatepicker to avoid Type
     CalendarModule,
     ReactiveFormsModule,
 
-    // HttpClientModule
   ],
   providers: [],
   templateUrl: './add-executive-plan.component.html',
@@ -46,10 +49,6 @@ declare var FlowBiteDatepicker: any; // Declare FlowBiteDatepicker to avoid Type
 export class AddExecutivePlanComponent implements OnInit {
   date2!: Date
   startDate: any
-  selectedLocale = 'ar';
-  dropdownOptions = [
-    "test", "test"
-  ]
   strategicPlan: any
   activites?: Activity
   employees: any
@@ -57,7 +56,12 @@ export class AddExecutivePlanComponent implements OnInit {
   administrations: Administration[] = []
   strategicPlanForm: FormGroup;
   plans: any
-  // datepickerEl = document.getElementById('datepickerId');
+  planIdParam: any
+  datePickerConfig = {
+    format: 'DD'
+  };
+
+  @ViewChild('datepickerId') datepickerEl!: ElementRef;
   @ViewChild('datepickerInput') datepickerInput!: ElementRef;
   destroyRef = inject(DestroyRef);
   constructor(
@@ -69,6 +73,7 @@ export class AddExecutivePlanComponent implements OnInit {
     private beneficiaryCateService: BeneficiaryCategoryService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private primengConfig: PrimeNGConfig,
+    private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -79,7 +84,7 @@ export class AddExecutivePlanComponent implements OnInit {
         main_goal: [''],
         Requirements: [''],
         expected_impact: [''],
-        cost: [0],
+        cost: [],
         description: [''],
         activity_id: [null, Validators.required],
         beneficiary_id: [null, Validators.required],
@@ -139,7 +144,6 @@ export class AddExecutivePlanComponent implements OnInit {
         description: [''],
         employee_id: [],
         administration_id: [],
-
       })])
     }));
   }
@@ -165,24 +169,34 @@ export class AddExecutivePlanComponent implements OnInit {
     this.getAdministrations()
     this.getBeneficieryCats()
     this.getEmployees()
-    this.getStraticigPlan()
+    // this.getStraticigPlan()
     this.primengConfig.ripple = true;
     if (isPlatformBrowser(this.platformId)) {
       initFlowbite()
-      this.initializeDatepicker();
+      this.initDatePickerElement(this.datepickerEl)
     }
-  }
-  getStraticigPlan() {
-    this.strategicPlanService.getstratigic_planByID(13).subscribe({
-      next: (data) => {
-        this.strategicPlan = data
-        console.log(this.strategicPlan)
-      },
-      error: (error) => {
-        console.log(error)
+    this.route.params.subscribe((params) => {
+      console.log(params)
+      if (params) {
+        this.planIdParam = params['id'];
+        const id = params['id']
+        console.log(' id:', this.planIdParam, id);
+
+        this.strategicPlanService.getstratigic_planByID(13).subscribe({
+          next: (data) => {
+            this.strategicPlan = data
+            console.log(this.strategicPlan)
+          },
+          error: (error) => {
+            console.log(error)
+          }
+        })
+
+
       }
     })
   }
+
   getActivities() {
     this.activityService.getActivities().subscribe({
       next: (data) => {
@@ -231,11 +245,11 @@ export class AddExecutivePlanComponent implements OnInit {
     return this.executivePlans.length - 1
   }
   addExecutivePlans() {
-    this.exectivePlanService.addExectivePlan(this.strategicPlanForm.value).subscribe({
+    this.exectivePlanService.addExectivePlan(this.strategicPlanForm.value, JSON.parse(this.planIdParam)).subscribe({
       next: (data) => {
         console.log(data)
         this.strategicPlanForm.reset()
-        this.router.navigate(['/executive_plans/13'])
+        this.router.navigate([`/executive_plans/${this.planIdParam}`])
       },
       error: (error) => {
         console.log(error)
@@ -259,19 +273,14 @@ export class AddExecutivePlanComponent implements OnInit {
     // this.datepickerEl.get
   }
 
-  initializeDatepicker(): void {
-    const datepickerInput = document.getElementById('datepickerInput');
-    const datepicker = new FlowBiteDatepicker(datepickerInput);
-
-    // Set up options
-    const options = {
-      // Add any options you need here
-    };
-
-    // Initialize the datepicker with options
-    datepicker.init(options);
-
-    // Show the picker at once
-    datepicker.showPicker();
+  private initDatePickerElement(element: any): void {
+    new Datepicker(element, this.datePickerConfig);
+    element.addEventListener('changeDate', (e: any) => {
+      const value = e.target.value;
+      const formControlName = e.target.getAttribute('formControlNamePath');
+      const formControl = this.strategicPlanForm.get(formControlName);
+      formControl?.setValue(value);
+      formControl?.markAsDirty();
+    });
   }
 }

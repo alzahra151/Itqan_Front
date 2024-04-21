@@ -27,8 +27,15 @@ padding: 0px !important;
     width: 100%;
     border-radius: 0px;
     padding-top:3px;
- padding-bottom:3px
-    // font-family: arabicFont !important;
+ padding-bottom:3px;
+    font-family: arabicFont !important;
+}
+::ng-deep .p-dropdown-label {
+    font-family: arabicFont !important;
+}
+::ng-deep .p-dropdown-item {
+    font-family: arabicFont !important;
+
 }
 :host ::ng-deep  .p-inputtext {
     padding: .2rem;
@@ -37,18 +44,18 @@ padding: 0px !important;
 :host ::ng-deep #custonm{
    background: #f8f085 !important;  
 }
-:host ::ng-deep .p-dropdown-items-wrapper{
-    z-index: 9999;
-}
- :host ::ng-deep .p-overlay {
-     z-index: 99999 !important; 
- }
- :host ::ng-deep .p-dropdown-items {
-  z-index: 99999 !important; 
- }
- :host ::ng-deep .p-dropdown-panel  {
-    z-index: 99999 !important;  
- }
+// :host ::ng-deep .p-dropdown-items-wrapper{
+//     z-index: 9999;
+// }
+//  :host ::ng-deep .p-overlay {
+//      z-index: 99999 !important; 
+//  }
+//  :host ::ng-deep .p-dropdown-items {
+//   z-index: 99999 !important; 
+//  }
+//  :host ::ng-deep .p-dropdown-panel  {
+//     z-index: 99999 !important;  
+//  }
  select{
 padding: 0;
 border: 0;
@@ -121,18 +128,18 @@ input:focus{
 // :host ::ng-deep .p-datepicker-group {
 // z-index: 10010 !important;
 // } 
-::ng-deep .p-accordion {
-  z-index: 2 !important;
-   overflow: visible
-}
-::ng-deep .p-accordion-tab {
-   z-index: 2 !important;
-    overflow: visible
-}
-::ng-deep .p-toggleable-content {
-    z-index: 2 !important;
-     overflow: visible
-}
-::ng-deep .ui-accordion .ui-accordion-content {
-      overflow: visible
-}
+// ::ng-deep .p-accordion {
+//   z-index: 2 !important;
+//    overflow: visible
+// }
+// ::ng-deep .p-accordion-tab {
+//    z-index: 2 !important;
+//     overflow: visible
+// }
+// ::ng-deep .p-toggleable-content {
+//     z-index: 2 !important;
+//      overflow: visible
+// }
+// ::ng-deep .ui-accordion .ui-accordion-content {
+//       overflow: visible
+// }

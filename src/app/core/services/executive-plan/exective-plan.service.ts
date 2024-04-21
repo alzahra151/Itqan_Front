@@ -9,8 +9,8 @@ import { environment } from '../../../../environments/environment';
 export class ExectivePlanService {
 
   constructor(private http: HttpClient) { }
-  addExectivePlan(data: ExectivePlan) {
-    return this.http.post(`${environment.apiUrl}/executive_plan/add`, data)
+  addExectivePlan(data: ExectivePlan, stratigyPlanId: any) {
+    return this.http.post(`${environment.apiUrl}/executive_plan/add/${stratigyPlanId}`, data)
   }
   getPlanById(id: any) {
     return this.http.get(`${environment.apiUrl}/executive_plan/${id}`,)

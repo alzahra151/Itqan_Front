@@ -33,7 +33,7 @@ export const routes: Routes = [
                 component: AddStratgyPlanComponent, // another child route component that the router renders
             },
             {
-                path: 'add-executive-plan',
+                path: 'add-executive-plan/:id',
                 component: AddExecutivePlanComponent, // another child route component that the router renders
             },
             {
